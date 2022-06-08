@@ -41,7 +41,7 @@
                 </thead>
                 <tbody>                              
                     {% for consultation in consultations %}
-                            <tr onclick="window.location='#'">
+                            <tr onclick="window.location='{% url 'view-record-patient-info' consultation.id %}'">
                                 <td>{{consultation.consultation_date}}</a></td>
                                 <td>{{consultation.pres_prob}}</td>
                                 <td>{{consultation.doctor}}</td>

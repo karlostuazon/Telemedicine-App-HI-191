@@ -32,6 +32,8 @@ def createRecord(request):
     return render(request, 'consultation_record/create-record.html', data)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Patient'])
 def viewRecordPatient(request):
     consultations = ConsultationRecord.objects.filter(patient=request.user.patient)
 
@@ -41,6 +43,19 @@ def viewRecordPatient(request):
     return render(request, 'consultation_record/view-record-patient.html', data) 
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Patient'])
+def viewRecordPatientInfo(request, pk):
+    cons = ConsultationRecord.objects.get(id=pk)
+
+    data={
+        'cons':cons,
+    }
+    return render(request, 'consultation_record/view-record-patient-info.html', data) 
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Doctor'])
 def viewRecordDoctor(request):
     consultations = ConsultationRecord.objects.filter(doctor=request.user.doctor)
     
