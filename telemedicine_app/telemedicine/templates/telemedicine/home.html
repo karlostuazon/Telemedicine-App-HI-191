@@ -11,41 +11,9 @@
 </style>
 <div class="container" style="margin-top: 2%;">
     <div class="row" style="padding:1%">
-        <div class="col-lg-6">
-            <h3>Search Patient:</h3>
-            <form method="get">
-              <div class="row">
-                <div class="col-sm-8">
-                  
-                  <div class="input-group date" id="datetimepicker" data-target-input="nearest">
-                    
-                    <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
-                      <div class="input-group-text"><i class="fa fa-calendar" style="height: 24px;"></i></div>
-                    </div>
-                  </div>
-                  <button type="submit" style="width: 100%;" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
-                  <p class="fw-lighter" style="color: red;">*Do not input to get all the records.</p>
-                </div>
-              </div>
-            </form>
-        </div>
-        
-        <div class="col-lg-6">
-          <a href="{% url 'create-record' %}">
-            <button type="submit" style="float:right; margin-bottom: 3%;"class="btn btn-primary">
-              Create New Record
-            </button>
-          </a>
+        <div class="col-lg-3">
         </div>
     </div>
 </div>
-
-<script>
-  $(function () {
-    $("#datetimepicker").datetimepicker({
-      format: 'MM/DD/YYYY',
-    });
-  });
-</script>
 
 {% endblock content %}
