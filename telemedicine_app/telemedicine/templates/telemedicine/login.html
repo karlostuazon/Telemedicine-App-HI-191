@@ -78,7 +78,7 @@ img.displayed {
                                 <p style="display:inline">Register as: </p>
                                 <a href="{% url 'register-patient' %}" style="color: blue;">Patient</a>
                                 <p style="display:inline"> or </p>
-                                <a href="#" style="color: blue;">Doctor</a>
+                                <a href="{% url 'register-doctor' %}" style="color: blue;">Doctor</a>
                             </div>
                         </form>
                         {% for message in messages %}

@@ -62,14 +62,13 @@ def registerPatient(request):
         userForm = UserForm(request.POST)
         patientForm = PatientForm(request.POST)
         if userForm.is_valid() and patientForm.is_valid():
-        #if userForm.is_valid():
             user = userForm.save()
             profile = patientForm.save(commit=False)
             profile.user = user
             patient = Group.objects.get(name='Patient')
-            #patient.user_set.add(User.objects.get(username = user.cleaned_data.get('username')).id)
+            patient.user_set.add(user)
             profile.save()
-            return render(request, "telemedicine/login.html")
+            return redirect('login')
         else:
             messages.error(request, "{} {} ".format(userForm.errors, patientForm.errors))
 
@@ -78,6 +77,32 @@ def registerPatient(request):
         'patientForm' : patientForm,
     }
     return render(request, 'telemedicine/register-patient.html', data)
+
+
+def registerDoctor(request):
+    userForm = UserForm()
+    doctorForm = DoctorForm()
+
+    if(request.method=='POST'):
+        userForm = UserForm(request.POST)
+        doctorForm = DoctorForm(request.POST)
+        if userForm.is_valid() and doctorForm.is_valid():
+            user = userForm.save()
+            profile = doctorForm.save(commit=False)
+            profile.user = user
+            doctor = Group.objects.get(name='Doctor')
+            doctor.user_set.add(user)
+            profile.save()
+            return redirect('login')
+        else:
+            messages.error(request, "{} {} ".format(userForm.errors, doctorForm.errors))
+
+    data = {
+        'userForm' : userForm,
+        'doctorForm' : doctorForm,
+    }
+    return render(request, 'telemedicine/register-doctor.html', data)
+
         
 
 
