@@ -19,7 +19,7 @@ def createRecord(request):
         if(cons_form.is_valid()):
             today = datetime.now()
             temp = cons_form.save(commit=False)
-            temp.doctor = request.user
+            temp.doctor = request.user.doctor
             temp.consultation_date = today
             temp.save()
             messages.success(request, 'Consultation form submitted!')
