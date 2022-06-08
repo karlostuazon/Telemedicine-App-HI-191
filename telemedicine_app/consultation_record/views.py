@@ -23,6 +23,7 @@ def createRecord(request):
             temp.consultation_date = today
             temp.save()
             messages.success(request, 'Consultation form submitted!')
+            return redirect('create-record')
         else:
             messages.error(request, cons_form.errors)
     data = {

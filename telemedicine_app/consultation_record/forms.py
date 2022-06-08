@@ -22,12 +22,12 @@ class ConsultationForm(forms.ModelForm):
             'landline': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Landline'}),
             'email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
 
-            'curr_med': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Make'}),
-            'temp': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Make'}),
-            'allergies': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Make'}),
-            'pres_prob': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Make'}),
-            'assessments': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Make'}),
-            'plan': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Make'}),
+            'curr_med': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Current Medications'}),
+            'temp': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Temperature'}),
+            'allergies': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Allergies'}),
+            'pres_prob': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Presenting Problems'}),
+            'assessments': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Assessments'}),
+            'plan': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Plan'}),
 
             'nxt_cons_date': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Date', 'type': 'date'}),
         }

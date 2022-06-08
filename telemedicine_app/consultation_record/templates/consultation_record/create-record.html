@@ -35,7 +35,7 @@
             <div class="row">
                 <table class="table table-bordered">
                   <tr>
-                    <th class="table-primary" colspan="9" ><b>Patient Information</b></th>
+                    <th class="table-primary" colspan="3" ><b>Patient Information</b></th>
                   </tr>
                   <tr>
                     <td class="table-light" colspan="1"><b>Patient:</b></td>
@@ -52,6 +52,51 @@
                     <td class="table-light" colspan="2">{{cons_form.mobile}}</td>
                     <td class="table-light" colspan="1"><b>Email:</b></td>
                     <td class="table-light" colspan="2">{{cons_form.email}}</td>
+                  </tr>
+                </table>
+                <table class="table table-bordered">
+                  <tr>
+                    <th class="table-primary" colspan="3" ><b>Current Medications</b></th>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="1">{{cons_form.curr_med}}</td>
+                    <td class="table-light" colspan="1"><b>Temperature:</b></td>
+                    <td class="table-light" colspan="1">{{cons_form.temp}}</td>
+                  </tr>
+                </table>
+                <table class="table table-bordered">
+                  <tr>
+                    <th class="table-primary" colspan="2" ><b>Allergies</b></th>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="2">{{cons_form.allergies}}</td>
+                  </tr>
+                </table>
+                <table class="table table-bordered">
+                  <tr>
+                    <th class="table-primary" colspan="9" ><b>Presenting Problems</b></th>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="2">{{cons_form.pres_prob}}</td>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="3">{{cons_form.assessments}}</td>
+                  </tr>
+                </table>
+                <table class="table table-bordered">
+                  <tr>
+                    <th class="table-primary" colspan="2" ><b>Plan</b></th>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="2">{{cons_form.plan}}</td>
+                  </tr>
+                </table>
+                <table class="table table-bordered">
+                  <tr>
+                    <th class="table-primary" colspan="2" ><b>Next Consultation Date</b></th>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="2">{{cons_form.nxt_cons_date}}</td>
                   </tr>
                 </table>
             </div>
