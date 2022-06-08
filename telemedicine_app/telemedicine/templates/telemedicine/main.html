@@ -72,7 +72,23 @@
                       <a class="nav-link" href="{% url 'create-record' %}">
                           <i class="fas fa-fw fa-plus"></i>
                           <span>Create New Record</span></a>
-                  </li>
+                    </li>
+                    <li class="nav-item {% if request.resolver_match.view_name == 'register' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'view-record-doctor' %}">
+                            <i class="fas fa-fw fa-address-card"></i>
+                            <span>View Consultation Records</span></a>
+                    </li>
+                    {% elif request.user|has_group:"Patient" %}
+                    <li class="nav-item {% if request.resolver_match.view_name == 'register' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'home' %}">
+                            <i class="fas fa-fw fa-table"></i>
+                            <span>Hello, {{request.user.patient.first_name}}!</span></a>
+                    </li>
+                    <li class="nav-item {% if request.resolver_match.view_name == 'register' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'view-record-patient' %}">
+                            <i class="fas fa-fw fa-address-card"></i>
+                            <span>View Consultation Records</span></a>
+                    </li>
                     {% endif %}
                 {% endif %}
             </li>

@@ -30,3 +30,21 @@ def createRecord(request):
         'cons_form': cons_form
     }
     return render(request, 'consultation_record/create-record.html', data)
+
+
+def viewRecordPatient(request):
+    consultations = ConsultationRecord.objects.filter(patient=request.user.patient)
+
+    data={
+        'consultations':consultations,
+    }
+    return render(request, 'consultation_record/view-record-patient.html', data) 
+
+
+def viewRecordDoctor(request):
+    consultations = ConsultationRecord.objects.filter(doctor=request.user.doctor)
+    
+    data={
+        'consultations':consultations,
+    }
+    return render(request, 'consultation_record/view-record-doctor.html', data) 
