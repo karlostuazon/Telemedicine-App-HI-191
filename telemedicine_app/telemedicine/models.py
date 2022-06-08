@@ -28,7 +28,7 @@ class Patient(models.Model):
     middle_name = models.CharField(max_length=100, null=True, blank=True)
     suffix = models.CharField(max_length=2, null=True, blank=True)
     sex = models.CharField(max_length=1, null=True, choices=SEX)
-    birthdate = models.DateField(null=True)
+    birthdate = models.DateField(null=True, blank=True)
     age = models.CharField(max_length=100, null=True, blank=True)
     attending_doctor = models.ForeignKey(Doctor, related_name="docpatient", on_delete=models.CASCADE, null=True, blank=True)
     documents = models.FileField(upload_to='docus/', null=True, blank=True)

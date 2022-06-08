@@ -71,7 +71,7 @@ def registerPatient(request):
             profile.save()
             return render(request, "telemedicine/login.html")
         else:
-            messages.error(request, 'Please Try Again')
+            messages.error(request, "{} {} ".format(userForm.errors, patientForm.errors))
 
     data = {
         'userForm' : userForm,

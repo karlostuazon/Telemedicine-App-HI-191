@@ -8,6 +8,7 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
+
 </head>
 
 <style>
@@ -48,11 +49,29 @@ img.displayed {
 }
 
 </style>
-<br>
-<br>
 
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <div class="alert alert-success d-flex align-items-center alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i>
+            <div class="message">
+            &nbsp;{{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        {% elif message.tags == 'error' %}
+        <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">
+            <i class="fas fa-times-circle"></i>
+            <div class="message">
+            &nbsp;{{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>  
+        {% endif %}
+    {% endfor %}  
+{% endif %}
 <div class="container">
-
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
@@ -97,6 +116,11 @@ img.displayed {
                                     {{patientForm.suffix}}
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0" id="first_name">
+                                    {{patientForm.sex}}
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0" id="birthdate">
@@ -124,23 +148,6 @@ img.displayed {
             </div>
         </div>
     </div>
-  
-  </div>
-  
-  <div style="margin-top: -1in;">
-    {% if userForm.errors %} {% for key, value in userForm.errors.items %}
-      <div
-        class="alert alert-danger alert-dismissable fade show reg-error"
-        role="alert"
-      >
-        <strong>Error!</strong> {{value|striptags}}
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
-      </div>
-      {% endfor %} {% endif %}
-  </div>
+</div>
+
   

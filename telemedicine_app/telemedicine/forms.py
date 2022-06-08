@@ -28,13 +28,6 @@ class UserForm(UserCreationForm):
 
 
 class PatientForm(ModelForm):
-    birthdate = DateField(
-        widget=DateInput(
-            attrs={'class': 'form-control datetimepicker-input', 'id': 'dob', 'placeholder': 'Birthdate(mm/dd/yyyy)',
-                     'data-target': '#datetimepicker1'},
-                     format='%m/%d/%y'
-        ),
-    )
     class Meta:
         model = Patient
         fields = ['last_name', 'first_name', 'middle_name', 'suffix', 'sex', 'age', 'attending_doctor', 'birthdate']
@@ -43,6 +36,7 @@ class PatientForm(ModelForm):
             'first_name': TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
             'middle_name': TextInput(attrs={'class': 'form-control', 'placeholder': 'Middle Name'}),
             'suffix': TextInput(attrs={'class': 'form-control', 'placeholder': 'Suffix'}),
+            'birthdate': NumberInput(attrs={'class': 'form-control', 'placeholder': 'Birthdate', 'type': 'date'}),
             'sex': Select(attrs={'class': 'form-control', 'placeholder': 'Sex'}),
             'age': TextInput(attrs={'class': 'form-control', 'placeholder': 'Age'}),
             'attending_doctor': Select(attrs={'class': 'form-control', 'placeholder': 'Attending Doctor'}),
