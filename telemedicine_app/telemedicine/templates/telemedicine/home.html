@@ -31,55 +31,11 @@
         </div>
         
         <div class="col-lg-6">
-          {% if messages %}
-            {% for message in messages %}
-              {% if message.tags == 'success' %}
-                <div class="alert alert-success d-flex align-items-center alert-dismissible fade show" role="alert">
-                  <i class="fas fa-check-circle"></i>
-                  <div class="message">
-                    &nbsp;{{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
-                </div>
-              {% elif message.tags == 'error' %}
-                <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">
-                  <i class="fas fa-times-circle"></i>
-                  <div class="message">
-                    &nbsp;{{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
-                </div>  
-              {% endif %}
-            {% endfor %}  
-          {% endif %}
-          <a href="#">
+          <a href="{% url 'create-record' %}">
             <button type="submit" style="float:right; margin-bottom: 3%;"class="btn btn-primary">
               Create New Record
             </button>
           </a>
-          
-          <table id="rows" class="table table-primary table-bordered table-hover border-dark"> 
-            <thead>
-              <th>Record #</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Date of Birth</th>
-            </thead>
-            
-            <tbody>
-              <tr onclick="window.location='#'">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-            <tr><td colspan="6" style="color: red;"><h6>No records found.</h6></td></tr>
-          </table>
-          <a href="#">
-            <button class="btn btn-danger"><i class="fas fa-search-minus"></i> Clear search</button>
-          </a>
-          
         </div>
     </div>
 </div>

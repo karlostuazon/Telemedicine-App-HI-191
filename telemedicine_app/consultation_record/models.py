@@ -7,10 +7,10 @@ from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 
 class ConsultationRecord(models.Model):
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True)
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, null=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, null=True, blank=True)
 
-    consultation_date = models.DateTimeField(null=True)
+    consultation_date = models.DateTimeField(null=True, blank=True)
 
     p_address = models.CharField(max_length=100, null=True, blank=True)
     landline = models.CharField(max_length=100, null=True, blank=True)

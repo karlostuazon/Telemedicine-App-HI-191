@@ -13,12 +13,14 @@
     <div class="row" style="padding:1%">
         <div class="col-lg-6">
             <h3>Create Consultation Record</h3>
-            <form method="get">
+            <form method="post">
+              {% csrf_token %}
               <div class="row">
                 <div class="col-sm-8">
-                  qweqwe
+                  {{cons_form}}
                 </div>
               </div>
+              <button type="submit" class="btn btn-success">Submit</button>
             </form>
         </div>
     </div>
