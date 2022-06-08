@@ -8,6 +8,8 @@ from django.contrib.auth.models import Group
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from .models import *
 from .forms import *
+from consultation_record.models import *
+from datetime import datetime
 
 # Create your views here.
 
@@ -37,13 +39,11 @@ def loginPage(request):
 
 @login_required(login_url='login')
 def homePage(request):
-    patients = Patient.objects.all()
-    #patientFilter = PatientFilter(request.GET, queryset=patients)
-    #patients = patientFilter.qs
-
-    #physicians = Physician.objects.all()
+    records = ConsultationRecord.objects.all()
+    today = datetime.now()
     data = {
-        'patients': patients,
+        'records': records,
+        'today': today
     }
 
     return render(request, "telemedicine/home.html", data)
