@@ -2,7 +2,7 @@
 
 <head>
 
-<title>LOGIN</title>
+<title>Patient Register</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -51,42 +51,96 @@ img.displayed {
 <br>
 <br>
 
-<div class="container-fluid login-container">
-    <div class="row justify-content-md-center">
-        <div class="col-lg-6 login-form-2">
-            <h3>UP TeleMed - Register as Patient</h3>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <img src="https://i.ibb.co/TL383RY/pexels-pixabay-40568-1.jpg" class="displayed" alt="..."/>
-                    </div>
-                    <div class="col-lg-8">
-                        <form method="POST">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <input type="text" name="username" class="form-control" placeholder="Username" value="" />
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create a Patient Account!</h1>
+                        </div>
+                        <form action="" method="post">
+                          {% csrf_token %}
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0" id="username">
+                                    {{userForm.username}}
+                                </div>
+                                <div class="col-sm-6" id="email">
+                                    {{userForm.email}}
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="password" name="password" class="form-control" placeholder="Password" value="" />
+                         
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0" id="password1">
+                                    {{userForm.password1}}
+                                </div>
+                                <div class="col-sm-6" id="password2">
+                                    {{userForm.password2}}
+                                </div>
                             </div>
-                            <center>
-                            <div class="form-group">
-                                <input type="submit" class="btn btnSubmit btn-primary" value="Login" />
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0" id="first_name">
+                                    {{patientForm.first_name}}
+                                </div>
+                                <div class="col-sm-6" id="last_name">
+                                    {{patientForm.last_name}}
+                                </div>
+                                <div class="col-sm-6" id="middle_name">
+                                    {{patientForm.middle_name}}
+                                </div>
+                                <div class="col-sm-6" id="suffix">
+                                    {{patientForm.suffix}}
+                                </div>
                             </div>
-                            </center>  
-                            <div class="form-group">
-                                <p style="display:inline">Register as: </p>
-                                <a href="#" style="color: blue;">Patient</a>
-                                <p style="display:inline"> or </p>
-                                <a href="#" style="color: blue;">Doctor</a>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0" id="birthdate">
+                                    {{patientForm.birthdate}}
+                                </div>
+                                <div class="col-sm-6" id="age">
+                                    {{patientForm.age}}
+                                </div>
                             </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0" id="birthdate">
+                                    <label>Attending Doctor:</label>
+                                    {{patientForm.attending_doctor}}
+                                </div>
+                            </div>
+                            <button id="submit_button" type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
                         </form>
-                        {% for message in messages %}
-                        <p id='messages' style="color: red; text-align: center;"> {{ message }}  </p>
-                        {% endfor %}
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" href="{% url 'login' %}">Already have an account? Login!</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+  
+  </div>
+  
+  <div style="margin-top: -1in;">
+    {% if userForm.errors %} {% for key, value in userForm.errors.items %}
+      <div
+        class="alert alert-danger alert-dismissable fade show reg-error"
+        role="alert"
+      >
+        <strong>Error!</strong> {{value|striptags}}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %} {% endif %}
+  </div>
+  

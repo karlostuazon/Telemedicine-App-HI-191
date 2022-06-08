@@ -3,9 +3,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import Group
 
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from .models import *
+from .forms import *
 
 # Create your views here.
 
@@ -50,3 +52,33 @@ def homePage(request):
 def logoutUser(request):
 	logout(request)
 	return redirect('login')
+
+
+def registerPatient(request):
+    userForm = UserForm()
+    patientForm = PatientForm()
+
+    if(request.method=='POST'):
+        userForm = UserForm(request.POST)
+        patientForm = PatientForm(request.POST)
+        if userForm.is_valid() and patientForm.is_valid():
+        #if userForm.is_valid():
+            user = userForm.save()
+            profile = patientForm.save(commit=False)
+            profile.user = user
+            patient = Group.objects.get(name='Patient')
+            #patient.user_set.add(User.objects.get(username = user.cleaned_data.get('username')).id)
+            profile.save()
+            return render(request, "telemedicine/login.html")
+        else:
+            messages.error(request, 'Please Try Again')
+
+    data = {
+        'userForm' : userForm,
+        'patientForm' : patientForm,
+    }
+    return render(request, 'telemedicine/register-patient.html', data)
+        
+
+
+
