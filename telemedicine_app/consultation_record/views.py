@@ -88,7 +88,6 @@ def consult(request, pk):
         else:
             messages.error(request, form.errors)
     return render(request, 'consultation_record/consult.html', {'form':form, 'record': record})
-    return render(request, 'consultation_record/view-record-doctor.html', data) 
 
 
 def uploadDocus(request,pk):
@@ -100,7 +99,7 @@ def uploadDocus(request,pk):
         cons_form = ConsultationForm(request.POST, request.FILES, instance=consultation)
         if(cons_form.is_valid()):
             temp = cons_form.save(commit=False)
-            temp.cons_date = cons_date
+            temp.consultation_date = cons_date
             temp.user = request.user
             print(request.POST)
             temp.save()
