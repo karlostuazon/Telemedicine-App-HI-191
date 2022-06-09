@@ -1,0 +1,40 @@
+{% extends 'telemedicine/main.html' %}
+{% load auth_extras %}
+{% block content %}
+
+<div class="card shadow mb-4" style="width: 50%;">
+    <div class="card-header py-3">
+        <h3 class="m-0 font-weight-bold" style="color:#00573f">Consultation Link</h3>
+        <a href="{{record.link}}" target="_blank"><h6 class="m-0 font-weight-bold" style="color:#00573f">{{record.link}}</h6></a>
+    </div>
+    <div class="card-body">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{form.link}}
+            <button class="btn btn-success" style="margin-top: 5%;">Save</button>
+        </form>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+            <div class="alert alert-success d-flex align-items-center alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle"></i>
+                <div class="message">
+                &nbsp;{{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            {% elif message.tags == 'error' %}
+            <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">
+                <i class="fas fa-times-circle"></i>
+                <div class="message">
+                &nbsp;{{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>  
+            {% endif %}
+        {% endfor %}  
+    {% endif %}
+</div>
+
+{% endblock %}

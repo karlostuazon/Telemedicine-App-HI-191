@@ -16,27 +16,28 @@
                       <th>Last Name</th>
                       <th>First Name</th>
                       <th>Consultation Date</th>
+                      <th>Consultation Link</th>
                       <th></th>
                   </tr>
               </thead>
               <tbody>               
                   {% for record in records %}
                     {% if record.consultation_date.day == today.day%}
-                      {% if request.user|has_group:'Doctor' %}
+                      {% if request.user|has_group:'Doctor' and record.doctor == request.user.doctor %}
                         <tr>
                           <td>{{record.id}}</td>
                           <td>{{record.patient.last_name}}</td>
                           <td>{{record.patient.first_name}}</td>
                           <td>{{record.consultation_date}}</td>
-                          <td><a href="#"><button class="btn btn-primary">Consult</button></a></td>
+                          <td><a href="{% url 'consult' record.id %}"><button class="btn btn-primary">Consult</button></a></td>
                         </tr>
-                      {% elif request.user|has_group:'Patient' and record.patient == request.user.patient%}
+                      {% elif request.user|has_group:'Patient' and record.patient == request.user.patient %}
                         <tr>
                           <td>{{record.id}}</td>
                           <td>Dr. {{record.doctor.last_name}}</td>
                           <td>{{record.doctor.first_name}}</td>
                           <td>{{record.consultation_date}}</td>
-                          <td><a href="#"><button class="btn btn-primary">Consult</button></a></td>
+                          <td><a href="{% url 'consult' record.id %}"><button class="btn btn-primary">Consult</button></a></td>
                         </tr>
                       {% endif %}
                     {% endif %}

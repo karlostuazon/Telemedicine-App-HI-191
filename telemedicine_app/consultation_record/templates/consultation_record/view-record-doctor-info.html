@@ -1,0 +1,106 @@
+{% extends 'telemedicine/main.html' %}
+{% block content %}
+{% load auth_extras %}
+<style>
+  .form-control{
+    margin-bottom: 10px;
+  }
+</style>
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <div class="alert alert-success d-flex align-items-center alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i>
+            <div class="message">
+            &nbsp;{{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        {% elif message.tags == 'error' %}
+        <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">
+            <i class="fas fa-times-circle"></i>
+            <div class="message">
+            &nbsp;{{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>  
+        {% endif %}
+    {% endfor %}  
+{% endif %}
+<h1 class="h3 mb-2">View Consultation Record</h1>
+<div class="card shadow mb-4">
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="card-body">
+            <div class="row">
+                <table class="table table-bordered">             
+                  <tr>
+                    <th class="table-primary" colspan="3" ><b>Patient Information</b></th>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="1"><b>Patient:</b></td>
+                    <td class="table-light" colspan="2">{{cons.patient}}</td>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="1"><b>Address:</b></td>
+                    <td class="table-light" colspan="2">{{cons.p_address}}</td>
+                    <td class="table-light" colspan="1"><b>Landline:</b></td>
+                    <td class="table-light" colspan="2">{{cons.landline}}</td>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="1"><b>Mobile:</b></td>
+                    <td class="table-light" colspan="2">{{cons.mobile}}</td>
+                    <td class="table-light" colspan="1"><b>Email:</b></td>
+                    <td class="table-light" colspan="2">{{cons.email}}</td>
+                  </tr>
+                </table>
+                <table class="table table-bordered">
+                  <tr>
+                    <th class="table-primary" colspan="3" ><b>Current Medications</b></th>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="1">{{cons.curr_med}}</td>
+                    <td class="table-light" colspan="1"><b>Temperature:</b></td>
+                    <td class="table-light" colspan="1">{{cons.temp}}</td>
+                  </tr>
+                </table>
+                <table class="table table-bordered">
+                  <tr>
+                    <th class="table-primary" colspan="2" ><b>Allergies</b></th>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="2">{{cons.allergies}}</td>
+                  </tr>
+                </table>
+                <table class="table table-bordered">
+                  <tr>
+                    <th class="table-primary" colspan="9" ><b>Presenting Problems</b></th>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="2">{{cons.pres_prob}}</td>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="3">{{cons.assessments}}</td>
+                  </tr>
+                </table>
+                <table class="table table-bordered">
+                  <tr>
+                    <th class="table-primary" colspan="2" ><b>Plan</b></th>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="2">{{cons.plan}}</td>
+                  </tr>
+                </table>
+                <table class="table table-bordered">
+                  <tr>
+                    <th class="table-primary" colspan="2" ><b>Next Consultation Date</b></th>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="2">{{cons.nxt_cons_date}}</td>
+                  </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

@@ -31,3 +31,10 @@ class ConsultationForm(forms.ModelForm):
 
             'nxt_cons_date': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Date', 'type': 'date'}),
         }
+class ConsultForm(forms.ModelForm):
+    class Meta:
+        model = ConsultationRecord
+        fields = 'link',
+        widgets = {
+            'link': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Link'}),
+        }

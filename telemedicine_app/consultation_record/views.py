@@ -62,4 +62,29 @@ def viewRecordDoctor(request):
     data={
         'consultations':consultations,
     }
-    return render(request, 'consultation_record/view-record-doctor.html', data) 
+    return render(request, 'consultation_record/view-record-doctor.html', data)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Doctor'])
+def viewRecordDoctorInfo(request, pk):
+    cons = ConsultationRecord.objects.get(id=pk)
+    
+    data={
+        'cons':cons,
+    }
+    return render(request, 'consultation_record/view-record-doctor-info.html', data)
+
+@login_required(login_url='login')
+def consult(request, pk):
+    record = ConsultationRecord.objects.get(id=pk)
+    form = ConsultForm(instance=record)
+    if(request.method == 'POST'):
+        form = ConsultForm(request.POST, instance=record)
+        if(form.is_valid()):
+            temp = form.save(commit=False)
+            temp.record = record
+            temp.save()
+            messages.success(request, 'Link has been saved.')
+        else:
+            messages.error(request, form.errors)
+    return render(request, 'consultation_record/consult.html', {'form':form, 'record': record})
