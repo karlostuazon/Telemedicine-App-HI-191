@@ -92,22 +92,27 @@ def consult(request, pk):
 
 def uploadDocus(request,pk):
     consultation = ConsultationRecord.objects.get(id=pk)
-    cons_date = consultation.consultation_date
-    cons_form = ConsultationForm(instance=consultation)
+    if(request.user.groups.filter(name='Doctor')):
+        form = PresForm(instance=consultation)
+    elif(request.user.groups.filter(name='Patient')):
+        form = DocuForm(instance=consultation)
 
     if(request.method == "POST"):
-        cons_form = ConsultationForm(request.POST, request.FILES, instance=consultation)
-        if(cons_form.is_valid()):
-            temp = cons_form.save(commit=False)
-            temp.consultation_date = cons_date
-            temp.user = request.user
-            print(request.POST)
+        if(request.user.groups.filter(name='Doctor')):
+            form = PresForm(request.POST, request.FILES, instance=consultation)
+        elif(request.user.groups.filter(name='Patient')):
+            form = DocuForm(request.POST, request.FILES, instance=consultation)
+        
+        if(form.is_valid()):
+            temp = form.save(commit=False)
+            temp.consultation = consultation
             temp.save()
             messages.success(request, 'Documents Uploaded.')
         else:
-            messages.error(request, cons_form.errors)
+            messages.error(request, form.errors)
     data = {
-        'cons_form' : cons_form
+        'cons_form' : form,
+        'record': consultation
     }
     return render(request, 'consultation_record/document-upload.html', data)
 

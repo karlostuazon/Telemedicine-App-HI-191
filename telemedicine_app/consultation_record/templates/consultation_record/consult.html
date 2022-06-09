@@ -5,7 +5,9 @@
 <div class="card shadow mb-4" style="width: 50%;">
     <div class="card-header py-3">
         <h3 class="m-0 font-weight-bold" style="color:#00573f">Consultation Link</h3>
+        {% if record.link %}
         <a href="{{record.link}}" target="_blank"><h6 class="m-0 font-weight-bold" style="color:#00573f">{{record.link}}</h6></a>
+        {% endif %}
     </div>
     <div class="card-body">
         <form action="" method="post">

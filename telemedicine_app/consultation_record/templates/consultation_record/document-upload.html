@@ -105,7 +105,11 @@
                 <th class="table-primary" colspan="2" ><b>Upload Documents</b></th>
               </tr>
               <tr>
+                {% if request.user|has_group:"Patient" %}
                 <td class="table-light" colspan="2">{{cons_form.document}}</td>
+                {% elif request.user|has_group:"Doctor" %}
+                <td class="table-light" colspan="2">{{cons_form.prescriptions}}</td>
+                {% endif %}
               </tr>
             </table>
             <button type="submit" class="btn btn-success">Submit</button>

@@ -30,6 +30,9 @@ class ConsultationRecord(models.Model):
 
     document = models.FileField(upload_to='docus/', null=True, blank=True)
 
+    prescriptions = models.FileField(upload_to='docus/', null=True, blank=True)
+    # def __str__(self):
+    #     return "{}".format(self.doctor)
     def __str__(self):
         return "{}, {} - {}".format(self.patient.last_name, self.patient.first_name, self.doctor.last_name)
 

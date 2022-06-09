@@ -42,11 +42,18 @@ class ConsultForm(forms.ModelForm):
             'link': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Link'}),
         }
 
-
 class DocuForm(forms.ModelForm):
     class Meta:
-        model = Documents
-        fields = ['file']
+        model = ConsultationRecord
+        fields = 'document',
         widgets = {
-            'file' : forms.FileInput(),
+            'document' : forms.FileInput(),
+        }
+
+class PresForm(forms.ModelForm):
+    class Meta:
+        model = ConsultationRecord
+        fields = 'prescriptions',
+        widgets = {
+            'prescriptions' : forms.FileInput(),
         }

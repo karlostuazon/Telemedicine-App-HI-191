@@ -115,12 +115,24 @@
                     <td class="table-light" colspan="2">{{cons.nxt_cons_date}}</td>
                   </tr>
                 </table>
+                <table class="table table-bordered">
+                  <tr>
+                    <th class="table-primary" colspan="2" ><b>Lab Request/Other documents</b></th>
+                    <th class="table-primary" colspan="3" ><b>Documents from the Doctor</b></th>
+                  </tr>
+                  <tr>
+                    <td class="table-light" colspan="1">
+                      <a href="{% url 'document-upload' cons.id %}" class="btn btn-primary btn-sm">Upload</a>
+                    </td>
+                    {% if cons.prescriptions %}
+                    <td class="table-light" colspan="2">
+                      <a href="/static{{ cons.prescriptions.url }}" target="_blank" class="btn btn-primary btn-sm">View Document</a>
+                    </td>
+                    <td class="table-light" colspan="2">{{cons.prescriptions}}</td>
+                    {% endif %}
+                  </tr>
+                </table>
             </div>
-            {% if not cons.document %}
-            <a href="{% url 'document-upload' cons.id %}" class="btn btn-primary btn-sm">Upload Documents</a>
-            {% else %}
-            <a href="/static{{ cons.document.url }}" class="btn btn-primary btn-sm">View Documents</a>
-            {% endif %}
         </div>
     </form>
 </div>
