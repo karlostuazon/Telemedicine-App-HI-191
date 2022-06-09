@@ -88,3 +88,28 @@ def consult(request, pk):
         else:
             messages.error(request, form.errors)
     return render(request, 'consultation_record/consult.html', {'form':form, 'record': record})
+    return render(request, 'consultation_record/view-record-doctor.html', data) 
+
+
+def uploadDocus(request,pk):
+    consultation = ConsultationRecord.objects.get(id=pk)
+    cons_date = consultation.consultation_date
+    cons_form = ConsultationForm(instance=consultation)
+
+    if(request.method == "POST"):
+        cons_form = ConsultationForm(request.POST, request.FILES, instance=consultation)
+        if(cons_form.is_valid()):
+            temp = cons_form.save(commit=False)
+            temp.cons_date = cons_date
+            temp.user = request.user
+            print(request.POST)
+            temp.save()
+            messages.success(request, 'Documents Uploaded.')
+        else:
+            messages.error(request, cons_form.errors)
+    data = {
+        'cons_form' : cons_form
+    }
+    return render(request, 'consultation_record/document-upload.html', data)
+
+

@@ -28,6 +28,15 @@ class ConsultationRecord(models.Model):
 
     link = models.CharField(max_length=100, null=True, blank=True)
 
+    document = models.FileField(upload_to='docus/', null=True, blank=True)
 
     def __str__(self):
         return "{}, {} - {}".format(self.patient.last_name, self.patient.first_name, self.doctor.last_name)
+
+
+class Documents(models.Model):
+    file = models.FileField(upload_to='docus/', null=True, blank=True)
+    cons_record = models.ForeignKey(ConsultationRecord, on_delete=models.CASCADE, null=True, blank=True)
+    
+    def __str__(self):
+        self.file + "-" + self.cons_record

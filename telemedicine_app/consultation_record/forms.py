@@ -30,11 +30,23 @@ class ConsultationForm(forms.ModelForm):
             'plan': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Plan'}),
 
             'nxt_cons_date': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Date', 'type': 'date'}),
+
+            'document' : forms.FileInput(),
         }
+
 class ConsultForm(forms.ModelForm):
     class Meta:
         model = ConsultationRecord
         fields = 'link',
         widgets = {
             'link': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Link'}),
+        }
+
+
+class DocuForm(forms.ModelForm):
+    class Meta:
+        model = Documents
+        fields = ['file']
+        widgets = {
+            'file' : forms.FileInput(),
         }

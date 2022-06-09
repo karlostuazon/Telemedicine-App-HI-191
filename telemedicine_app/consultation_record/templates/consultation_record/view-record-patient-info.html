@@ -30,7 +30,9 @@
 <h1 class="h3 mb-2">View Consultation Record</h1>
 <div class="card shadow mb-4">
     <form action="" method="post" enctype="multipart/form-data">
+        
         <div class="card-body">
+            
             <div class="row">
                 <table class="table table-bordered">
                   <tr>
@@ -114,6 +116,11 @@
                   </tr>
                 </table>
             </div>
+            {% if not cons.document %}
+            <a href="{% url 'document-upload' cons.id %}" class="btn btn-primary btn-sm">Upload Documents</a>
+            {% else %}
+            <a href="/static{{ cons.document.url }}" class="btn btn-primary btn-sm">View Documents</a>
+            {% endif %}
         </div>
     </form>
 </div>

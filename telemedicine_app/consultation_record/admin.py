@@ -5,3 +5,4 @@ from consultation_record.models import *
 # Register your models here.
 admin.site.register(ConsultationRecord)
 # admin.site.register(Link)
+admin.site.register(Documents)

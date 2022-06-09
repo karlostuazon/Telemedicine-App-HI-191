@@ -27,12 +27,12 @@
         {% endif %}
     {% endfor %}  
 {% endif %}
-<h1 class="h3 mb-2">Create Consultation Form</h1>
+<h1 class="h3 mb-2">Upload Documents</h1>
 <div class="card shadow mb-4">
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="card-body">
-            <div class="row">
+            <div hidden class="row">
                 <table class="table table-bordered">
                   <tr>
                     <th class="table-primary" colspan="3" ><b>Patient Information</b></th>
@@ -99,15 +99,15 @@
                     <td class="table-light" colspan="2">{{cons_form.nxt_cons_date}}</td>
                   </tr>
                 </table>
-                <table hidden class="table table-bordered">
-                  <tr>
-                    <th class="table-primary" colspan="2" ><b>Upload Documents</b></th>
-                  </tr>
-                  <tr>
-                    <td class="table-light" colspan="2">{{cons_form.document}}</td>
-                  </tr>
-                </table>
             </div>
+            <table class="table table-bordered">
+              <tr>
+                <th class="table-primary" colspan="2" ><b>Upload Documents</b></th>
+              </tr>
+              <tr>
+                <td class="table-light" colspan="2">{{cons_form.document}}</td>
+              </tr>
+            </table>
             <button type="submit" class="btn btn-success">Submit</button>
         </div>
     </form>
