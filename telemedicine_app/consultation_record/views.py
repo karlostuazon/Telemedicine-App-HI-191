@@ -3,7 +3,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import Group
+from django.http import JsonResponse
+from agora_token_builder import RtcTokenBuilder
+from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
+import json
+import random
+import time
 
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from .models import *
@@ -74,6 +80,7 @@ def viewRecordDoctorInfo(request, pk):
     }
     return render(request, 'consultation_record/view-record-doctor-info.html', data)
 
+
 @login_required(login_url='login')
 def consult(request, pk):
     record = ConsultationRecord.objects.get(id=pk)
@@ -115,5 +122,63 @@ def uploadDocus(request,pk):
         'record': consultation
     }
     return render(request, 'consultation_record/document-upload.html', data)
+
+
+def videoConsult(request):
+    return render(request, 'consultation_record/consult2.html')
+
+
+def chatRoom(request):
+    return render(request, 'consultation_record/chat-room.html')
+
+
+def getToken(request):
+    appId = "f019464b45bb488589ab2ddb23888f80"
+    appCertificate = "72a02659bc2c451ea21aee44473dad4a"
+    channelName = request.GET.get('channel')
+    uid = random.randint(1, 230)
+    expirationTimeInSeconds = 3600
+    currentTimeStamp = int(time.time())
+    privilegeExpiredTs = currentTimeStamp + expirationTimeInSeconds
+    role = 1
+
+    token = RtcTokenBuilder.buildTokenWithUid(appId, appCertificate, channelName, uid, role, privilegeExpiredTs)
+
+    return JsonResponse({'token': token, 'uid': uid}, safe=False)
+
+
+@csrf_exempt
+def createMember(request):
+    data = json.loads(request.body)
+    member, created = RoomMember.objects.get_or_create(
+        name=data['name'],
+        uid=data['UID'],
+        room_name=data['room_name']
+    )
+
+    return JsonResponse({'name':data['name']}, safe=False)
+
+
+def getMember(request):
+    uid = request.GET.get('UID')
+    room_name = request.GET.get('room_name')
+
+    member = RoomMember.objects.get(
+        uid=uid,
+        room_name=room_name,
+    )
+    name = member.name
+    return JsonResponse({'name':member.name}, safe=False)
+
+@csrf_exempt
+def deleteMember(request):
+    data = json.loads(request.body)
+    member = RoomMember.objects.get(
+        name=data['name'],
+        uid=data['UID'],
+        room_name=data['room_name']
+    )
+    member.delete()
+    return JsonResponse('Member deleted', safe=False)
 
 

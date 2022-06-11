@@ -1,0 +1,39 @@
+{% extends 'telemedicine/main.html' %}
+{% load auth_extras %}
+{% load static %}
+{% block content %}
+
+<link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+
+<main>
+    <div class="card shadow mb-4" style="width: 100%;">
+        <div class="card-body">
+            <section id="room-name-wrapper">
+                <p>Room Name: <span id="room-name"></span></p>
+            </section>
+        
+            <section id="video-streams"></section>
+        
+            <section id="controls-wrapper">
+
+                <div class="icon-wrapper">
+                    <img class="control-icon" id="camera-btn" src="{% static 'images/video.png' %}" />
+                </div>
+
+                <div class="icon-wrapper">
+                    <img class="control-icon" id="mic-btn" src="{% static 'images/microphone.png' %}" />
+                </div>
+        
+                <div class="icon-wrapper">
+                    <img class="control-icon" id="leave-btn" src="{% static 'images/close.png' %}" />
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+
+
+<script type="text/javascript" src="{% static 'js/AgoraRTC_N-4.8.0.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/streams.js' %}" ></script>
+
+{% endblock %}

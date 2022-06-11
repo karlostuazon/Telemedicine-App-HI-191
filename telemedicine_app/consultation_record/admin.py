@@ -6,3 +6,4 @@ from consultation_record.models import *
 admin.site.register(ConsultationRecord)
 # admin.site.register(Link)
 admin.site.register(Documents)
+admin.site.register(RoomMember)

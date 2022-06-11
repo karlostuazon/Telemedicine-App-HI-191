@@ -11,6 +11,14 @@ urlpatterns = [
      path('view-record-patient-info/<str:pk>', views.viewRecordPatientInfo, name = 'view-record-patient-info'),
      path('consult/<str:pk>', views.consult, name = 'consult'),
      path('document-upload/<str:pk>', views.uploadDocus, name = 'document-upload'),
+
+     path('consult2', views.videoConsult, name = 'video-consult'),
+     path('chat-room', views.chatRoom, name = 'chat-room'),
+
+     path('get_token/', views.getToken, name = 'get-token'),
+     path('create_member/', views.createMember, name = 'create-member'),
+     path('get_member/', views.getMember, name = 'get-member'),
+     path('delete_member/', views.deleteMember, name = 'delete-member'),
 ]
 
 if settings.DEBUG:

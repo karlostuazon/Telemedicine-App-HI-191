@@ -28,7 +28,7 @@
                           <td>{{record.patient.last_name}}</td>
                           <td>{{record.patient.first_name}}</td>
                           <td>{{record.consultation_date}}</td>
-                          <td><a href="{% url 'consult' record.id %}"><button class="btn btn-primary">Consult</button></a></td>
+                          <td><a href="{% url 'video-consult' %}"><button class="btn btn-primary">Consult</button></a></td>
                         </tr>
                       {% elif request.user|has_group:'Patient' and record.patient == request.user.patient %}
                         <tr>
@@ -36,7 +36,7 @@
                           <td>Dr. {{record.doctor.last_name}}</td>
                           <td>{{record.doctor.first_name}}</td>
                           <td>{{record.consultation_date}}</td>
-                          <td><a href="{% url 'consult' record.id %}"><button class="btn btn-primary">Consult</button></a></td>
+                          <td><a href="{% url 'video-consult' %}"><button class="btn btn-primary">Consult</button></a></td>
                         </tr>
                       {% endif %}
                     {% endif %}
